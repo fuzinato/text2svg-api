@@ -1,5 +1,8 @@
+const demoText = document.body.querySelector('#demo');
+const size = demoText.getBoundingClientRect()
+
 //Create a new mock canvas context. Pass in your desired width and height for your svg document.
-var ctx = new C2S(300,100);
+var ctx = new C2S(size.width, size.height);
 
 //draw your canvas like you would normally
 ctx.fillStyle="red";
