@@ -12,8 +12,9 @@ ctx.fillText('Hello world', 10, 50);
 
 //serialize your SVG
 var mySerializedSVG = ctx.getSerializedSvg(); //true here, if you need to convert named to numbered entities.
-
+console.log(mySerializedSVG)
 //If you really need to you can access the shadow inline SVG created by calling:
 var svg = ctx.getSvg();
 document.body.appendChild(svg)
-console.log(svg)
+
+
