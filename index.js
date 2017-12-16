@@ -13,7 +13,12 @@ app.get('/', (req, res) => {
   res.send(query)
 })
 
-app.listen("8080")
+var port = process.env.PORT || 8080;
+
+app.listen(port, function () {
+  console.log('Listening to port: ' + port);
+});
+
 
 function loadSvg(query) {
   const { text, fonturl, x, y, fontSize, fill} = query
