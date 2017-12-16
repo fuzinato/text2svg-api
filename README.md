@@ -1,1 +1,1 @@
-## text2svg-api
+## text2svg-webapp
