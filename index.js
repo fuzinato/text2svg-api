@@ -1,9 +1,6 @@
 const express = require('express');
 const TextToSVG = require('./modules/TextToSVG');
 const url = require('url');
-const fs = require('fs');
-const text = 'Permanent Marker'
-const fonturl2 = 'http://fonts.gstatic.com/s/permanentmarker/v7/9vYsg5VgPHKK8SXYbf3sMol14xj5tdg9OHF8w4E7StQ.ttf'
 
 const app = express();
 
@@ -12,7 +9,7 @@ app.get('/', (req, res) => {
   const query = url_parts.query;
 
   const {text,fonturl, x, y, fontsize, fill} = query;
-  loadSvg(query)
+  // loadSvg(query)
   res.send(query)
 })
 
@@ -26,14 +23,14 @@ function loadSvg(query) {
     const options = { x, y, fontSize, anchor: 'top', attributes };
 
     const svg = textToSVG.getSVG(`${text} `, options);
-
+    return svg
     // Send back the file here
-    fs.writeFile("bin/test.svg", svg, 'utf8', function (err) {
-      if (err) {
-        return console.log(err);
-      }
-      console.log("The file was saved!");
-    });
+    // fs.writeFile("bin/test.svg", svg, 'utf8', function (err) {
+    //   if (err) {
+    //     return console.log(err);
+    //   }
+    //   console.log("The file was saved!");
+    // });
   });
 }
 
