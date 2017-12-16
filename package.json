@@ -1,6 +1,7 @@
 {
-  "name": "canavs2svg-webapp",
+  "name": "text2svg-api",
   "version": "1.0.0",
+  "author": "Dario Fuzinato",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,12 +11,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/fussinatto/canvas2svg-webapp.git"
+    "url": "git+ssh://git@github.com:fuzinato/text2svg-api.git"
   },
   "keywords": [],
-  "author": "Dario Fuzinato",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/fussinatto/canvas2svg-webapp#readme",
+  "homepage": "https://github.com/fuzinato/text2svg-api#readme",
   "dependencies": {
     "express": "^4.16.2",
     "opentype.js": "git+https://github.com/fussinatto/opentype.js.git"
