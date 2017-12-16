@@ -1,19 +1,45 @@
+const express = require('express');
 const TextToSVG = require('./modules/TextToSVG');
-const fs = require('fs')
+const url = require('url');
+const fs = require('fs');
 const text = 'Permanent Marker'
-const fontUrl = 'http://fonts.gstatic.com/s/permanentmarker/v7/9vYsg5VgPHKK8SXYbf3sMol14xj5tdg9OHF8w4E7StQ.ttf'
+const fonturl2 = 'http://fonts.gstatic.com/s/permanentmarker/v7/9vYsg5VgPHKK8SXYbf3sMol14xj5tdg9OHF8w4E7StQ.ttf'
 
-TextToSVG.load(fontUrl, function(err, textToSVG) {
-  const attributes = {fill: 'red'};
-  const options = {x: 0, y: 0, fontSize: 72, anchor: 'top', attributes: attributes};
-   
-  const svg = textToSVG.getSVG(`${text} `, options);
+const app = express();
+
+app.get('/', (req, res) => {
+  const url_parts = url.parse(req.url, true);
+  const query = url_parts.query;
+
+  const {text,fonturl, x, y, fontsize, fill} = query;
+  loadSvg(query)
+  res.send(query)
+})
+
+app.listen("8080")
+
+function loadSvg(query) {
+  const { text, fonturl, x, y, fontSize, fill} = query
   
-  fs.writeFile("bin/test.svg", svg, 'utf8', function (err) {
-    if (err) {
+  TextToSVG.load(fonturl, function (err, textToSVG) {
+    const attributes = { fill };
+    const options = { x, y, fontSize, anchor: 'top', attributes };
+
+    const svg = textToSVG.getSVG(`${text} `, options);
+
+    // Send back the file here
+    fs.writeFile("bin/test.svg", svg, 'utf8', function (err) {
+      if (err) {
         return console.log(err);
-    }
-    console.log("The file was saved!");
+      }
+      console.log("The file was saved!");
+    });
   });
-  console.log(svg);
-});
+}
+
+
+// DECODING URL
+var uri = "https://w3schools.com/my test.asp?name=ståle&car=saab";
+var uri_enc = encodeURIComponent(uri);
+var uri_dec = decodeURIComponent(uri_enc);
+var res = uri_enc + "<br>" + uri_dec;

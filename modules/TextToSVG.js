@@ -1,6 +1,3 @@
-/**
- * Copyright (c) 2016 Hideki Shiro
- */
 
 const opentype = require('opentype.js');
 
