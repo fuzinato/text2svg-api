@@ -71,8 +71,8 @@ class TextToSVG {
     const fontSize = options.fontSize || 72;
     const anchor = parseAnchorOption(options.anchor || '');
 
-    const width = this.getWidth(text, options);
-    const height = this.getHeight(fontSize);
+    const width = options.width || this.getWidth(text, options);
+    const height = options.height || this.getHeight(fontSize);
 
     const fontScale = 1 / this.font.unitsPerEm * fontSize;
     const ascender = this.font.ascender * fontScale;
