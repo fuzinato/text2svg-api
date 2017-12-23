@@ -1,16 +1,19 @@
-const express = require('express');
-const TextToSVG = require('./modules/TextToSVG');
-const url = require('url');
+const express = require('express')
+const LoadSVG = require('./modules/LoadSVG')
 
-const app = express();
+const app = express()
 
-app.get('/', (req, res) => {
-  const url_parts = url.parse(req.url, true);
-  const query = url_parts.query;
+app.get('/code', async function (req, res) {
+  const processedSVG = await LoadSVG(req.url)
+  res.send(processedSVG)
+})
 
-  const {text,fonturl, x, y, fontsize, fill} = query;
-  // loadSvg(query)
-  res.send(query)
+app.get('/download', async function (req, res) {
+  const processedSVG = await LoadSVG(req.url)
+
+  res.set({"Content-Disposition":"attachment; filename=\"blabla.svg\""});
+  res.send(processedSVG);
+
 })
 
 var port = process.env.PORT || 8080;
@@ -18,30 +21,3 @@ var port = process.env.PORT || 8080;
 app.listen(port, function () {
   console.log('Listening to port: ' + port);
 });
-
-
-function loadSvg(query) {
-  const { text, fonturl, x, y, fontSize, fill} = query
-  
-  TextToSVG.load(fonturl, function (err, textToSVG) {
-    const attributes = { fill };
-    const options = { x, y, fontSize, anchor: 'top', attributes };
-
-    const svg = textToSVG.getSVG(`${text} `, options);
-    return svg
-    // Send back the file here
-    // fs.writeFile("bin/test.svg", svg, 'utf8', function (err) {
-    //   if (err) {
-    //     return console.log(err);
-    //   }
-    //   console.log("The file was saved!");
-    // });
-  });
-}
-
-
-// DECODING URL
-var uri = "https://w3schools.com/my test.asp?name=ståle&car=saab";
-var uri_enc = encodeURIComponent(uri);
-var uri_dec = decodeURIComponent(uri_enc);
-var res = uri_enc + "<br>" + uri_dec;

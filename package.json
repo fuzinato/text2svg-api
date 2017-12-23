@@ -18,6 +18,7 @@
   "homepage": "https://github.com/fuzinato/text2svg-api#readme",
   "dependencies": {
     "express": "^4.16.2",
+    "fastify": "^0.37.0",
     "opentype.js": "git+https://github.com/fussinatto/opentype.js.git"
   },
   "devDependencies": {
