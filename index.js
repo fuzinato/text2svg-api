@@ -11,7 +11,7 @@ app.use(function(req, res, next) {
 });
 
 app.get('/code', async function (req, res) {
-  // res.set({"Content-Type":"text/plain"});
+  res.set({"Content-Type":"text/plain"});
   const processedSVG = await LoadSVG(req.url)
   res.send(processedSVG);
 })
